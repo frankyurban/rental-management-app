@@ -1,11 +1,14 @@
+'use client'
+
 import { useEffect } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
-export default function RoleProfilePage({ params }: { params: { role: string } }) {
+export default function RoleProfilePage() {
   const { user, loading } = useAuth()
   const router = useRouter()
-
+  const params = useParams<{ role: string }>()
+  
   useEffect(() => {
     if (!loading && user && user.role !== params.role) {
       router.push(`/profile/${user.role}`)
