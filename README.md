@@ -149,34 +149,48 @@ npx prisma studio
 
 ## Deployment
 
-### Backend Deployment
+### Recommended Architecture
 
-1. Set environment variables for production
-2. Run database migrations:
+For production deployment, we recommend separating the frontend and backend:
+
+1. **Frontend** (Next.js) → Vercel
+2. **Backend** (Express.js) → Render
+3. **Database** (PostgreSQL) → Render
+
+### Backend Deployment on Render
+
+1. Create an account at [Render](https://render.com)
+2. Create a new Web Service
+3. Connect your GitHub repository
+4. Configure settings:
+   - Root Directory: `backend`
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+5. Add environment variables:
+   - `DATABASE_URL`: PostgreSQL connection string
+   - `JWT_SECRET`: Your JWT secret key
+6. Deploy the service
+
+### Database Setup on Render
+
+1. Create a new PostgreSQL database on Render
+2. Copy the "External Database URL"
+3. Add it as `DATABASE_URL` in your web service environment variables
+4. Run migrations after deployment:
    ```bash
    npx prisma migrate deploy
    ```
-3. Start the server:
-   ```bash
-   npm start
-   ```
 
-### Frontend Deployment
+### Frontend Deployment on Vercel
 
-1. Build the application:
-   ```bash
-   npm run build
-   ```
+1. Your frontend is already connected to Vercel
+2. Add environment variable in Vercel settings:
+   - `NEXT_PUBLIC_API_URL`: Your Render backend URL
+3. Redeploy the application
 
-2. Start the production server:
-   ```bash
-   npm start
-   ```
+### Detailed Deployment Guide
 
-Or deploy to Vercel:
-1. Push to GitHub
-2. Connect repository to Vercel
-3. Set environment variables in Vercel dashboard
+See [DEPLOYMENT.md](DEPLOYMENT.md) for a complete step-by-step guide.
 
 ## Contributing
 
