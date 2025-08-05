@@ -1,0 +1,106 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Property {
+  id                 Int      @id @default(autoincrement())
+  address            String
+  city               String
+  state              String
+  zip                String
+  rent               Float
+  imageUrl           String?
+  sqft               Int?
+  bedrooms           Int?
+  fullBaths          Int?
+  threeQuarterBaths  Int?
+  halfBaths          Int?
+  quarterBaths       Int?
+  yearBuilt          Int?
+  propertyType       String?
+  features           String?   // Or use String[] if using Postgres
+  renovations        String?   // Or use String[] if using Postgres
+  homeValue          Float?   // New field for home value
+  useZestimate       Boolean? // New field for using Zestimate
+  ownerId            Int?     // Foreign key to User
+
+  analysis           PropertyAnalysis?
+  leases             Lease[]
+  owner              User?    @relation(fields: [ownerId], references: [id])
+}
+
+model PropertyAnalysis {
+  propertyId         Int     @id
+  scenarioName       String?
+  vacancy            Float?
+  repairs            Float?
+  capex              Float?
+  propManagement     Float?
+  rentalIncome       Float?
+  laundry            Float?
+  storage            Float?
+  parking            Float?
+  miscIncomes        String?  // Or use String[] if using Postgres
+  miscIncomeVals     String?  // Or use Json[] if using Postgres
+  taxes              Float?
+  insurance          Float?
+  water              Float?
+  garbage            Float?
+  electric           Float?
+  gas                Float?
+  hoa                Float?
+  lawn               Float?
+  mortgage           Float?
+  downPayment        Float?
+  closingCosts       Float?
+  rehab              Float?
+  cashMisc           String?  // Or use String[] if using Postgres
+  cashMiscVals       String?  // Or use Json[] if using Postgres
+
+  property           Property @relation(fields: [propertyId], references: [id])
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  role      String     @default("user") // "admin", "staff", "owner", "tenant"
+  name      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  properties Property[]
+}
+
+model Tenant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leases    Lease[]
+}
+
+model Lease {
+  id          Int      @id @default(autoincrement())
+  startDate   DateTime
+  endDate     DateTime
+  monthlyRent Float
+  securityDeposit Float
+  tenantId    Int
+  propertyId  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  property    Property @relation(fields: [propertyId], references: [id])
+}

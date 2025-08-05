@@ -1,0 +1,24 @@
+Income					Cash Flow				
+Rental Income				$1,950.00	Total Monthly Income				$1,950.00
+Laundry					Total Monthly Expenses				$1,648.20
+Storage									
+Parking					Total Monthly Cash Flow 				$301.80
+Misc 1 (______________)									x12
+Misc 2 (______________)									
+Misc 3 (______________)									
+Total Monthly Income				$1,950.00	Total Annual Cash Flow				$3,621.60
+Expenses					Cash on Cash Return				
+Taxes					Down Payment				$18,000.00
+Insurance				$93.00	Closing Costs				$7,000.00
+Water/Sewer					Rehab Budget				$2,500.00
+Garbage					Misc other 1 (New AC Install)				$7,000.00
+Electric					Misc other 2 (______________)				
+Gas					Misc other 3 (______________)				
+HOA Fees									
+Lawn/Snow					Total Investment 				$34,500.00
+Vacancy 	5	% of Rental Income		$97.50					
+Repairs 	10	% of Rental Income		$195.00	Annual Cash Flow/Total Investement				0.104974
+CapEx 	10	% of Rental Income		$195.00					x100
+Prop. Management 	8.6	% of Rental Income		$167.70					
+Mortgage				$900.00					
+Total Monthly Expenses				$1,648.20	Cash on Cash Return				10.50%
